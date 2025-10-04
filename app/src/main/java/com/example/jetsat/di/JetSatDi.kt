@@ -29,24 +29,26 @@ class JetSatDi {
             "jetsat.db"
         )
             .build()
-        @Provides
-        @Singleton
-        fun provideCustomerDao(db: JetSatDatabase): CustomerDao = db.customerDao()
+           }
 
-        @Provides
-        @Singleton
-        fun provideInvoiceDao(db: JetSatDatabase): InvoiceDao = db.invoiceDao()
+    @Provides
+    @Singleton
+    fun provideCustomerDao(db: JetSatDatabase): CustomerDao = db.customerDao()
 
-        @Provides
-        @Singleton
-        fun provideInvoiceTypeDao(db: JetSatDatabase): InvoiceTypeDao = db.invoiceTypeDao()
+    @Provides
+    @Singleton
+    fun provideInvoiceDao(db: JetSatDatabase): InvoiceDao = db.invoiceDao()
 
-        @Provides
-        @Singleton
-        fun provideProductDao(db: JetSatDatabase): ProductDao = db.productDao()
+    @Provides
+    @Singleton
+    fun provideInvoiceTypeDao(db: JetSatDatabase): InvoiceTypeDao = db.invoiceTypeDao()
 
-        @Provides
-        @Singleton
-        fun provideProductMovementDao(db: JetSatDatabase): ProductMovementDao = db.productMovementDao()
-    }
+    @Provides
+    @Singleton
+    fun provideProductDao(db: JetSatDatabase): ProductDao = db.productDao()
+
+    @Provides
+    @Singleton
+    fun provideProductMovementDao(db: JetSatDatabase): ProductMovementDao = db.productMovementDao()
+
 }
