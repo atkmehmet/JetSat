@@ -10,12 +10,12 @@ import kotlinx.coroutines.flow.Flow
 interface CustomerDao {
 
     @Upsert
-     suspend fun insertCustomer(customer: Customer)
+     suspend fun upsertCustomer(customer: Customer)
 
-     @Query("DELETE FROM Customer WHERE id = :id")
-     suspend fun  deleteCustomer(id:Int)
+     @Query("DELETE FROM Customer WHERE id = :customerId")
+     suspend fun  deleteCustomer(customerId:Int)
 
      @Query("SELECT * FROM Customer")
-      fun getCustomer():Flow<List<Customer>>
+      fun getCustomers():Flow<List<Customer>>
 
 }

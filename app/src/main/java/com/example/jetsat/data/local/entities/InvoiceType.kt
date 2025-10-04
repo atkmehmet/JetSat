@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class InvoiceType(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val code: String,      // "SALE", "PURCHASE", "RETURN"
-    val name: String,      // "Satış", "Alış", "İade"
-    val description: String? = null // isteğe bağlı açıklama
+    val code: String,
+    val name: String,
+    val description: String? = null
 )

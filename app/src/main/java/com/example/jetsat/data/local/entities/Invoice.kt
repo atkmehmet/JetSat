@@ -8,6 +8,6 @@ data class Invoice(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val date: Long,
     val type: String, // "SALE", "PURCHASE", "RETURN"
-    val customerName: String? = null, // isteğe bağlı
+    val customerName: String? = null,
     val totalPrice: Double = 0.0
 )
