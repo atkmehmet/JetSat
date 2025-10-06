@@ -6,23 +6,24 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Upsert
-import com.example.jetsat.data.local.entities.Product
+
+import com.example.jetsat.data.local.entities.ProductEntity
 import com.example.jetsat.data.local.model.ProductWithCategory
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
 
-    @Query("DELETE  FROM Product where id= :productId")
+    @Query("DELETE  FROM ProductEntity where id= :productId")
     suspend fun  deleteProduct(productId:Int)
     
       @Upsert
-      suspend fun addProduct(product: Product)
+      suspend fun addProduct(product: ProductEntity)
 
-       @Query("SELECT * FROM PRODUCT")
-       fun getProduct():Flow<List<Product>>
+       @Query("SELECT * FROM ProductEntity")
+       fun getProduct():Flow<List<ProductEntity>>
 
          @Transaction
-        @Query("select * from Product")
+        @Query("select * from ProductEntity")
         fun getProductCategory():Flow<List<ProductWithCategory>>
 }

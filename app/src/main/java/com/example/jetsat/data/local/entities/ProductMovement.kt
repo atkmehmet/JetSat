@@ -8,19 +8,19 @@ import androidx.room.PrimaryKey
 @Entity(
     foreignKeys = [
         ForeignKey(
-            entity = Product::class,
+            entity = ProductEntity::class,
             parentColumns = ["id"],
             childColumns = ["productId"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
-            entity = Invoice::class,
+            entity = InvoiceEntity::class,
             parentColumns = ["id"],
             childColumns = ["invoiceId"],
             onDelete = ForeignKey.SET_NULL
         ),
         ForeignKey(
-            entity = Customer::class,
+            entity = CustomerEntity::class,
             parentColumns = ["id"],
             childColumns = ["customerId"],
             onDelete = ForeignKey.SET_NULL
@@ -28,7 +28,7 @@ import androidx.room.PrimaryKey
     ],
     indices = [Index("productId"), Index("invoiceId"), Index("customerId")]
 )
-data class ProductMovement(
+data class ProductMovementEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val productId: Int,
     val invoiceId: Int? = null,

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Invoice(
+data class InvoiceEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val date: Long,
     val type: String, // "SALE", "PURCHASE", "RETURN"
