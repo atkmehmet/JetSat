@@ -17,6 +17,7 @@ data class ProductMovement (
     val createdAt: Long = System.currentTimeMillis()
 ){
     fun isValid():Boolean{
-        return productId>0 && invoiceId?:0>0 && invoiceItemId
+        return productId>0 && invoiceId?:0>0 && invoiceItemId?:0>0 && movementType.isNotEmpty() && quantity>0.0
+                    &&  unitPrice>0.0 && customerId?:0>0
     }
 }
