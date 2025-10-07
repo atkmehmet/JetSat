@@ -2,6 +2,7 @@ package com.example.jetsat.data.local.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.example.jetsat.data.local.entities.CategoryEntity
 import com.example.jetsat.data.local.entities.ProductEntity
 
 data class ProductWithCategory(
@@ -11,6 +12,6 @@ data class ProductWithCategory(
         parentColumn = "categoryId",
         entityColumn = "id"
     )
-    val category: ProductWithCategory
+    val category: CategoryEntity
 
 )

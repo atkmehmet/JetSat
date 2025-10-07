@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface CustomerRepository {
 
-    suspend fun saveUpdateCostomer(customer: Customer)
+    suspend fun saveUpdateCustomer(customer: Customer)
 
-    suspend fun deleteCustomer(cutomerId:Int)
+    suspend fun deleteCustomer(customerId:Int)
 
-    fun getCutomer():Flow<List<Customer>>
+    fun getCustomer():Flow<List<Customer>>
 }
