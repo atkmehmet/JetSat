@@ -8,7 +8,9 @@ import com.example.jetsat.data.local.dao.InvoiceTypeDao
 import com.example.jetsat.data.local.dao.ProductDao
 import com.example.jetsat.data.local.dao.ProductMovementDao
 import com.example.jetsat.data.local.database.JetSatDatabase
+import com.example.jetsat.data.local.repository.CustomerRepositoryImpl
 import com.example.jetsat.data.local.repository.ProductRepositoryImpl
+import com.example.jetsat.domain.repository.CustomerRepository
 import com.example.jetsat.domain.repository.ProductRepository
 import dagger.Module
 import dagger.Provides
@@ -56,6 +58,12 @@ class JetSatDi {
     @Provides
     fun provideProductRepository(productDao: ProductDao):ProductRepository{
         return ProductRepositoryImpl(productDao)
+    }
+
+
+    @Provides
+    fun providecustomerRepository(customerDao: CustomerDao):CustomerRepository{
+        return CustomerRepositoryImpl(customerDao)
     }
 
 
