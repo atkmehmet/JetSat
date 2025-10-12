@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.example.jetsat.data.local.entities.CategoryEntity
+import com.example.jetsat.domain.model.Category
 
 import kotlinx.coroutines.flow.Flow
 
@@ -12,7 +13,7 @@ interface ProductWithCategoryDao {
 
 
     @Upsert
-    suspend fun upsertProductWithCategory(productWithCategoryDao: ProductWithCategoryDao)
+    suspend fun upsertProductWithCategory(category: CategoryEntity)
 
     @Query("DELETE FROM CategoryEntity where id= :productWithCategoryId")
     suspend fun deleteProductWithCategory(productWithCategoryId:Int)
