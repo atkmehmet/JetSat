@@ -7,10 +7,19 @@ import com.example.jetsat.data.local.dao.InvoiceDao
 import com.example.jetsat.data.local.dao.InvoiceTypeDao
 import com.example.jetsat.data.local.dao.ProductDao
 import com.example.jetsat.data.local.dao.ProductMovementDao
+import com.example.jetsat.data.local.dao.ProductWithCategoryDao
 import com.example.jetsat.data.local.database.JetSatDatabase
+import com.example.jetsat.data.local.repository.CategoryRepositoryImpl
 import com.example.jetsat.data.local.repository.CustomerRepositoryImpl
+import com.example.jetsat.data.local.repository.InvoiceRepositoryImpl
+import com.example.jetsat.data.local.repository.InvoiceTypeRepositoryImpl
+import com.example.jetsat.data.local.repository.ProductMovementRepositoryImpl
 import com.example.jetsat.data.local.repository.ProductRepositoryImpl
+import com.example.jetsat.domain.repository.CategoryRepository
 import com.example.jetsat.domain.repository.CustomerRepository
+import com.example.jetsat.domain.repository.InvoiceRepository
+import com.example.jetsat.domain.repository.InvoiceTypeRepository
+import com.example.jetsat.domain.repository.ProductMovementRepository
 import com.example.jetsat.domain.repository.ProductRepository
 import dagger.Module
 import dagger.Provides
@@ -62,8 +71,29 @@ class JetSatDi {
 
 
     @Provides
-    fun providecustomerRepository(customerDao: CustomerDao):CustomerRepository{
+    fun provideCustomerRepository(customerDao: CustomerDao):CustomerRepository{
         return CustomerRepositoryImpl(customerDao)
+    }
+
+    @Provides
+    fun provideProductMovementRepository(productMovementDao: ProductMovementDao):ProductMovementRepository{
+        return ProductMovementRepositoryImpl(productMovementDao)
+    }
+
+    @Provides
+    fun provideInvoiceRepository(invoiceDao: InvoiceDao):InvoiceRepository{
+        return InvoiceRepositoryImpl(invoiceDao)
+    }
+
+    @Provides
+    fun provideInvoiceTypeRepository(invoiceTypeDao: InvoiceTypeDao):InvoiceTypeRepository{
+        return InvoiceTypeRepositoryImpl(invoiceTypeDao)
+    }
+
+    @Provides
+    fun provideCategoryRepository(categoryDao: ProductWithCategoryDao):CategoryRepository{
+
+        return CategoryRepositoryImpl(categoryDao)
     }
 
 

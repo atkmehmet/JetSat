@@ -1,12 +1,13 @@
 package com.example.jetsat.data.local.repository
 
+import com.example.jetsat.data.local.dao.InvoiceDao
 import com.example.jetsat.data.local.dao.InvoiceTypeDao
 import com.example.jetsat.domain.model.Invoice
 import com.example.jetsat.domain.repository.InvoiceRepository
 import kotlinx.coroutines.flow.Flow
 
 class InvoiceRepositoryImpl(
-    private val invoiceTypeDao: InvoiceTypeDao
+    private val invoiceDao: InvoiceDao
 ):InvoiceRepository {
     override suspend fun saveUpdateInvoice(invoice: Invoice) {
         TODO("Not yet implemented")
