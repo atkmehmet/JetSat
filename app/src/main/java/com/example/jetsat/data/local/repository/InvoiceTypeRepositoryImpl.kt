@@ -5,19 +5,26 @@ import com.example.jetsat.domain.model.Invoice
 import com.example.jetsat.domain.model.InvoiceType
 import com.example.jetsat.domain.repository.InvoiceRepository
 import com.example.jetsat.domain.repository.InvoiceTypeRepository
+import com.example.jetsat.mapper.toInvoiceType
+import com.example.jetsat.mapper.toInvoiceTypeEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class InvoiceTypeRepositoryImpl(private val invoiceTypeDao: InvoiceTypeDao):InvoiceTypeRepository {
     override suspend fun saveUpdateInvoiceType(invoiceType: InvoiceType) {
-        TODO("Not yet implemented")
+        invoiceTypeDao.upsertInvoiceType(invoiceType.toInvoiceTypeEntity())
     }
 
     override suspend fun deleteInvoiceType(invoiceTypeId: Int) {
-        TODO("Not yet implemented")
+        invoiceTypeDao.deleteInvoiceType(invoiceTypeId)
     }
 
     override fun getInvoiceType(): Flow<List<InvoiceType>> {
-        TODO("Not yet implemented")
+     return   invoiceTypeDao.getInvoiceTypes().map { invoiceTypeEntity ->
+            invoiceTypeEntity.map {
+                it.toInvoiceType()
+            }
+        }
     }
 
 }

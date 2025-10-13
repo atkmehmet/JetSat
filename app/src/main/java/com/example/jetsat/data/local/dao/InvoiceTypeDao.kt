@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface InvoiceTypeDao {
 
     @Upsert
-    suspend fun upsertInvoiceType(invoiceTypeDao: InvoiceTypeDao)
+    suspend fun upsertInvoiceType(invoiceTypeEntity: InvoiceTypeEntity )
 
     @Query("Delete from InvoiceTypeEntity Where id=:invoiceTypeId")
      suspend fun  deleteInvoiceType(invoiceTypeId:Int)
