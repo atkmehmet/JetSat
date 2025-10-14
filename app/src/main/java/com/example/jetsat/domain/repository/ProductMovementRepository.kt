@@ -21,7 +21,7 @@ interface ProductMovementRepository {
 
 
 
-    fun getAllMovements(): Flow<List<ProductMovementEntity>>
+    fun getAllMovements(): Flow<List<ProductMovement>>
 
 
 
@@ -37,6 +37,6 @@ interface ProductMovementRepository {
 
 
 
-    fun getMovementsByType(type: String): Flow<List<ProductMovementEntity>>
+    fun getMovementsByType(type: String): Flow<List<ProductMovement>>
 
 }
