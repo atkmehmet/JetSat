@@ -4,7 +4,7 @@ import androidx.room.PrimaryKey
 
 data class Category(
     val id: Int = 0,
-    val categoryName: String
+    val categoryName: String=""
 ){
     fun isValid():Boolean{
         return categoryName.isNotEmpty()
