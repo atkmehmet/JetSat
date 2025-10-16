@@ -24,7 +24,8 @@ import javax.inject.Inject
         var category by mutableStateOf(Category())
         private var _listCategory = MutableStateFlow<List<Category>>(emptyList())
         val categories :StateFlow<List<Category>> = _listCategory
-        init {
+
+    init {
                   viewModelScope.launch {
                       categoryRepository.getCategoris().collect{
                           _listCategory.value = it
@@ -37,4 +38,11 @@ import javax.inject.Inject
             categoryRepository.saveUpdateCategory(category)
         }
     }
+
+    fun deleteCategory(id:Int){
+        viewModelScope.launch {
+            categoryRepository.deleteCategory(id)
+        }
+    }
+
     }
