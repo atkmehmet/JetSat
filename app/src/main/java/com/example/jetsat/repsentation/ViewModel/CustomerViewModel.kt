@@ -39,6 +39,4 @@ class CustomerViewModel @Inject constructor (
             customerRepository.deleteCustomer(id)
         }
     }
-
-
 }
