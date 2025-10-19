@@ -17,7 +17,7 @@ class CustomerViewModel @Inject constructor (
 ):ViewModel() {
 
    private var _customerList = MutableStateFlow<List<Customer>>(emptyList())
-    var customerList : StateFlow<List<Customer>> = _customerList
+        var customerList : StateFlow<List<Customer>> = _customerList
     var customer by mutableStateOf(Customer())
 
     init {

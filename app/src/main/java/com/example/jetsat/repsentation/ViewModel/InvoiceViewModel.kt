@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetsat.domain.model.Product
-import com.example.jetsat.domain.repository.ProductRepository
+import com.example.jetsat.domain.model.Invoice
+import com.example.jetsat.domain.repository.InvoiceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,35 +15,34 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductViewModel @Inject constructor(
-    private val productRepository: ProductRepository
-)
-    :ViewModel() {
+class InvoiceViewModel @Inject constructor(
+    private val  invoiceRepository: InvoiceRepository
+) :ViewModel() {
+    private val _invoiceList = MutableStateFlow<List<Invoice>> (emptyList())
 
-        private val _productList = MutableStateFlow<List<Product>>(emptyList())
+    val invoiceList :StateFlow<List<Invoice>> = _invoiceList
 
-       val productList : StateFlow <List<Product>> = _productList
-
-       var product by mutableStateOf(Product())
-
+    var invoice by mutableStateOf(Invoice())
 
     init {
         viewModelScope.launch {
-            productRepository.getProducts().map {
-                _productList.value = it
+            invoiceRepository.getInvoice().map {
+                _invoiceList.value = it
             }
         }
     }
 
+
     fun saveUptade(){
         viewModelScope.launch {
-            productRepository.saveUpdateProduct(product)
+            invoiceRepository.saveUpdateInvoice(invoice)
         }
     }
 
     fun delete(id:Int){
         viewModelScope.launch {
-            productRepository.deleteProduct(id)
+            invoiceRepository.deleteInvoice(id)
         }
     }
+
 }

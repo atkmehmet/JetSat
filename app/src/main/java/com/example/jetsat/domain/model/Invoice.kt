@@ -4,8 +4,8 @@ import androidx.room.PrimaryKey
 
 data class Invoice (
     val id: Int = 0,
-    val date: Long,
-    val type: String, // "SALE", "PURCHASE", "RETURN"
+    val date: Long = System.currentTimeMillis() ,
+    val type: String = "SALE", // "SALE", "PURCHASE", "RETURN"
     val customerName: String? = null,
     val totalPrice: Double = 0.0
     ){
