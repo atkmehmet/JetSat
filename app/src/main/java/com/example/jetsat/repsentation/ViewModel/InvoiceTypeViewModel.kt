@@ -43,4 +43,24 @@ class InvoiceTypeViewModel @Inject constructor(
             invoiceTypeRepository.deleteInvoiceType(id)
         }
     }
+
+    fun onCodeChange(newCode:String){
+        invoiceType = invoiceType.copy(
+            code = newCode
+
+        )
+    }
+
+    fun onNameChange(newName:String){
+        invoiceType = invoiceType.copy(
+            name = newName
+
+        )
+    }
+
+    fun onDescriptionChange(newDescription:String){
+        invoiceType = invoiceType.copy(
+            description = newDescription
+        )
+    }
 }

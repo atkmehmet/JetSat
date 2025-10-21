@@ -12,14 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.jetsat.domain.model.InvoiceType
+import com.example.jetsat.repsentation.ViewModel.InvoiceTypeViewModel
 import com.example.jetsat.repsentation.components.AppOutlinedTextField
 
 @Composable
 fun InvoiceTypeScreen(
-    viewModel: InvoiceTypeViewModel = viewModel(),
-    onSaveClick: (InvoiceType) -> Unit
+    viewModel: InvoiceTypeViewModel = hiltViewModel(),
 ) {
-    val uiState = viewModel.uiState
+
 
     Column(
         modifier = Modifier
@@ -34,8 +36,8 @@ fun InvoiceTypeScreen(
         Spacer(Modifier.height(16.dp))
 
         AppOutlinedTextField(
-            value = uiState.code,
-            onValueChange = viewModel::onCodeChange,
+            value = viewModel.invoiceType.code,
+                onValueChange = viewModel::onCodeChange,
             label = "Code",
             placeholder = "Enter code"
         )
@@ -43,7 +45,7 @@ fun InvoiceTypeScreen(
         Spacer(Modifier.height(8.dp))
 
         AppOutlinedTextField(
-            value = uiState.name,
+            value = viewModel.invoiceType.name,
             onValueChange = viewModel::onNameChange,
             label = "Name",
             placeholder = "Enter name"
@@ -52,7 +54,7 @@ fun InvoiceTypeScreen(
         Spacer(Modifier.height(8.dp))
 
         AppOutlinedTextField(
-            value = uiState.description,
+            value = viewModel.invoiceType.description?:"veri girişi",
             onValueChange = viewModel::onDescriptionChange,
             label = "Description",
             placeholder = "Optional",
@@ -62,8 +64,8 @@ fun InvoiceTypeScreen(
         Spacer(Modifier.height(16.dp))
 
         Button(
-            onClick = { onSaveClick(viewModel.toInvoiceType()) },
-            enabled = uiState.isValid,
+            onClick = { viewModel.saveUpdate() },
+            enabled = viewModel.invoiceType.isValid(),
             modifier = Modifier.align(Alignment.End)
         ) {
             Text("Save")
