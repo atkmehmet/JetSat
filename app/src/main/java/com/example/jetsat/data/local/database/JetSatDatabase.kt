@@ -8,19 +8,22 @@ import com.example.jetsat.data.local.dao.InvoiceTypeDao
 import com.example.jetsat.data.local.dao.ProductDao
 import com.example.jetsat.data.local.dao.ProductMovementDao
 import com.example.jetsat.data.local.dao.ProductWithCategoryDao
-import com.example.jetsat.data.local.entities.Customer
-import com.example.jetsat.data.local.entities.Invoice
-import com.example.jetsat.data.local.entities.InvoiceType
-import com.example.jetsat.data.local.entities.Product
-import com.example.jetsat.data.local.entities.ProductMovement
-import com.example.jetsat.data.local.entities.ProductWithCategory
+import com.example.jetsat.data.local.entities.CategoryEntity
 
-@Database(entities = [Customer::class,
-    Invoice::class,
-    InvoiceType::class,
-    Product::class,
-    ProductMovement::class,
-    ProductWithCategory::class], version = 1)
+import com.example.jetsat.data.local.entities.CustomerEntity
+
+import com.example.jetsat.data.local.entities.InvoiceEntity
+import com.example.jetsat.data.local.entities.InvoiceTypeEntity
+import com.example.jetsat.data.local.entities.ProductEntity
+
+import com.example.jetsat.data.local.entities.ProductMovementEntity
+
+@Database(entities = [CustomerEntity::class,
+    InvoiceEntity::class,
+    InvoiceTypeEntity::class,
+    ProductEntity::class,
+    ProductMovementEntity::class,
+    CategoryEntity::class], version = 1)
 abstract class JetSatDatabase():RoomDatabase(){
 
     abstract fun customerDao():CustomerDao
