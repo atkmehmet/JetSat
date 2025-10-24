@@ -1,6 +1,6 @@
 package com.example.jetsat.data.local.repository
 
-import com.example.jetsat.data.local.dao.ProductWithCategoryDao
+import com.example.jetsat.data.local.dao.CategoryDao
 import com.example.jetsat.domain.model.Category
 import com.example.jetsat.domain.repository.CategoryRepository
 import com.example.jetsat.mapper.toCategory
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class CategoryRepositoryImpl(
-    private val categoryDao: ProductWithCategoryDao
+    private val categoryDao: CategoryDao
 ):CategoryRepository {
     override suspend fun saveUpdateCategory(category: Category) {
         categoryDao.upsertProductWithCategory(category.toCategoryEntity())

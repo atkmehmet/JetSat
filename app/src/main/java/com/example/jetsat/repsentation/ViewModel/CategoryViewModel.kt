@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jetsat.data.local.dao.ProductWithCategoryDao
+import com.example.jetsat.data.local.dao.CategoryDao
 import com.example.jetsat.domain.model.Category
 import com.example.jetsat.domain.repository.CategoryRepository
 import com.example.jetsat.mapper.toCategory

@@ -9,7 +9,7 @@ import com.example.jetsat.domain.model.Category
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ProductWithCategoryDao {
+interface CategoryDao {
 
 
     @Upsert

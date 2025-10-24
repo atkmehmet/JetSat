@@ -2,12 +2,12 @@ package com.example.jetsat.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.jetsat.data.local.dao.CategoryDao
 import com.example.jetsat.data.local.dao.CustomerDao
 import com.example.jetsat.data.local.dao.InvoiceDao
 import com.example.jetsat.data.local.dao.InvoiceTypeDao
 import com.example.jetsat.data.local.dao.ProductDao
 import com.example.jetsat.data.local.dao.ProductMovementDao
-import com.example.jetsat.data.local.dao.ProductWithCategoryDao
 import com.example.jetsat.data.local.database.JetSatDatabase
 import com.example.jetsat.data.local.repository.CategoryRepositoryImpl
 import com.example.jetsat.data.local.repository.CustomerRepositoryImpl
@@ -62,6 +62,11 @@ class JetSatDi {
 
     @Provides
     @Singleton
+    fun provideCategoryDao(db: JetSatDatabase): CategoryDao = db.productWithCategory()
+
+
+    @Provides
+    @Singleton
     fun provideProductMovementDao(db: JetSatDatabase): ProductMovementDao = db.productMovementDao()
 
     @Provides
@@ -91,7 +96,7 @@ class JetSatDi {
     }
 
     @Provides
-    fun provideCategoryRepository(categoryDao: ProductWithCategoryDao):CategoryRepository{
+    fun provideCategoryRepository(categoryDao: CategoryDao):CategoryRepository{
 
         return CategoryRepositoryImpl(categoryDao)
     }
