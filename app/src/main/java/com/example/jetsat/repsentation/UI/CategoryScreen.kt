@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,7 +23,7 @@ fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
             .padding(8.dp)
     ) {
         Text(
-            text = "Add Invoice Type",
+            text = "Add Category ",
             style = MaterialTheme.typography.headlineSmall
         )
 
@@ -30,9 +32,19 @@ fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
         AppOutlinedTextField(
             value = categoryViewModel.category.categoryName,
             onValueChange = categoryViewModel::onNameChange,
-            label = "Code",
-            placeholder = "Enter code"
+            label = " Name",
+            placeholder = "Enter Name"
         )
+
+        Spacer(Modifier.height(16.dp))
+
+        Button(
+            onClick = { categoryViewModel.saveUpdate() },
+            enabled = categoryViewModel.category.categoryName.isNotEmpty(),
+            modifier = Modifier.align(Alignment.End)
+        ) {
+            Text("Save")
+        }
 
     }
 
