@@ -11,11 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
 @Composable
 fun AppOutlinedTextField(
     value: String,
-    onValueChange: (String) -> Unit,
+    onValueChange: ((String) -> Unit)? = null,
     label: String,
     modifier: Modifier = Modifier,
     placeholder: String = "",
@@ -28,9 +27,13 @@ fun AppOutlinedTextField(
     Column(modifier = modifier) {
         OutlinedTextField(
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = { newText ->
+                onValueChange?.invoke(newText)
+            },
             label = { Text(label) },
-            placeholder = { if (placeholder.isNotEmpty()) Text(placeholder) },
+            placeholder = {
+                if (placeholder.isNotEmpty()) Text(placeholder)
+            },
             modifier = Modifier.fillMaxWidth(),
             singleLine = singleLine,
             isError = isError,

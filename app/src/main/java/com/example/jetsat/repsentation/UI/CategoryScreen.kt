@@ -27,6 +27,13 @@ fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
             style = MaterialTheme.typography.headlineSmall
         )
 
+        AppOutlinedTextField(
+            value = categoryViewModel.category.id.toString(),
+            onValueChange =null ,
+            label = " code",
+            placeholder = " code"
+        )
+
         Spacer(Modifier.height(16.dp))
 
         AppOutlinedTextField(
