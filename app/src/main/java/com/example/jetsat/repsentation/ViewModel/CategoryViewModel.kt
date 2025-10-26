@@ -44,5 +44,10 @@ import javax.inject.Inject
             categoryRepository.deleteCategory(id)
         }
     }
+    fun onNameChange(newName:String){
+        category = category.copy(
+            categoryName = newName
+        )
+    }
 
     }
