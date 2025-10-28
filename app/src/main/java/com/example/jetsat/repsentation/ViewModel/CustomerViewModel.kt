@@ -39,4 +39,29 @@ class CustomerViewModel @Inject constructor (
             customerRepository.deleteCustomer(id)
         }
     }
+
+    fun onNameChange(newName:String){
+        customer = customer.copy(
+            name = newName
+        )
+    }
+
+    fun onEmailChange(newEmail:String){
+        customer = customer.copy(
+            email = newEmail
+        )
+    }
+
+    fun onPhoneChange(newPhone:String){
+        customer = customer.copy(
+            phone = newPhone
+        )
+    }
+
+    fun onAddressChange(newAddress:String){
+        customer = customer.copy(
+            address = newAddress
+        )
+    }
+
 }
