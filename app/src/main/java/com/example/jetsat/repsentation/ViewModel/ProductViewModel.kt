@@ -46,4 +46,17 @@ class ProductViewModel @Inject constructor(
             productRepository.deleteProduct(id)
         }
     }
+
+    fun onProductNameChange(newName:String){
+
+        product = product.copy(
+            productName = newName
+        )
+    }
+    fun onProductTakePriceChange(price:String){
+
+        product = product.copy(
+            productTakePrice = price.toDouble()
+        )
+    }
 }
