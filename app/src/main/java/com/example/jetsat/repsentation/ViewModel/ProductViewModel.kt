@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jetsat.domain.model.Category
 import com.example.jetsat.domain.model.Product
+import com.example.jetsat.domain.repository.CategoryRepository
 import com.example.jetsat.domain.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,12 +18,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val categoryRepository: CategoryRepository
 )
     :ViewModel() {
-
         private val _productList = MutableStateFlow<List<Product>>(emptyList())
 
+        private val _categortyList = MutableStateFlow<List<Category>>(emptyList())
+
+        val categoryList : StateFlow <List<Category>> = _categortyList
        val productList : StateFlow <List<Product>> = _productList
 
        var product by mutableStateOf(Product())
@@ -31,6 +36,9 @@ class ProductViewModel @Inject constructor(
         viewModelScope.launch {
             productRepository.getProducts().map {
                 _productList.value = it
+            }
+            categoryRepository.getCategoris().map {
+                _categortyList.value = it
             }
         }
     }
@@ -53,10 +61,23 @@ class ProductViewModel @Inject constructor(
             productName = newName
         )
     }
-    fun onProductTakePriceChange(price:String){
+    fun onProductTakePriceChange(priceTake:String){
 
         product = product.copy(
-            productTakePrice = price.toDouble()
+            productTakePrice = priceTake.toDouble()
+        )
+    }
+
+    fun onProductSoldPriceChange(priceSold:String){
+
+        product = product.copy(
+            productSoldPrice = priceSold.toDouble()
+        )
+    }
+    fun onCategoryIdChange(categoryId:String){
+
+        product = product.copy(
+            categoryId = categoryId.toInt()
         )
     }
 }

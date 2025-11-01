@@ -17,7 +17,8 @@ import com.example.jetsat.repsentation.components.AppOutlinedTextField
 @Composable
 fun ProductScreen( productViewModel: ProductViewModel = hiltViewModel()){
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(8.dp)
     ) {
 
@@ -33,6 +34,33 @@ fun ProductScreen( productViewModel: ProductViewModel = hiltViewModel()){
             placeholder = " Product Id"
         )
         Spacer(Modifier.height(8.dp))
+
+        AppOutlinedTextField(
+            value = productViewModel.product.productName,
+            onValueChange = productViewModel::onProductNameChange,
+            label = "Product Name",
+            placeholder = "Product Name"
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+        AppOutlinedTextField(
+            value = productViewModel.product.productTakePrice.toString(),
+            onValueChange = productViewModel::onProductTakePriceChange,
+            label = "Product Take Price",
+            placeholder = "Product Take Price"
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+
+        AppOutlinedTextField(
+            value = productViewModel.product.productSoldPrice.toString(),
+            onValueChange = productViewModel::onProductSoldPriceChange,
+            label = "Product Sold Price",
+            placeholder = "Product Sold Price"
+        )
+
 
 
     }
