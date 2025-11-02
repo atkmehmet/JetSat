@@ -13,6 +13,5 @@ data class Product (
                 productSoldPrice > 0 &&
                 categoryId > 0
     }
-
 }
 
