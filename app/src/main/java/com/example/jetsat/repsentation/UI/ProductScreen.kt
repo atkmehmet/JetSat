@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetsat.repsentation.ViewModel.ProductViewModel
 import com.example.jetsat.repsentation.components.AppOutlinedTextField
+import com.example.jetsat.repsentation.components.SearchableDropdownTextField
 
 @Composable
 fun ProductScreen( productViewModel: ProductViewModel = hiltViewModel()){
@@ -61,7 +63,19 @@ fun ProductScreen( productViewModel: ProductViewModel = hiltViewModel()){
             placeholder = "Product Sold Price"
         )
 
+        Spacer(Modifier.height(8.dp))
 
+        SearchableDropdownTextField(
+            items = productViewModel.categoryList.collectAsState().value,
+            itemToString = {it.categoryName},
+            selectedItem = productViewModel.category,
+            onItemSelected = {category ->
+                productViewModel.category = category
+            }
+            ,
+            label = "Choose Category",
+            placeholder = "Choose Category"
+        )
 
     }
 }

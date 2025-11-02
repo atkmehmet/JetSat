@@ -1,7 +1,9 @@
 package com.example.jetsat.repsentation.ViewModel
 
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,6 +29,10 @@ class ProductViewModel @Inject constructor(
         private val _categortyList = MutableStateFlow<List<Category>>(emptyList())
 
         val categoryList : StateFlow <List<Category>> = _categortyList
+        var category by
+            mutableStateOf( Category() )
+
+
        val productList : StateFlow <List<Product>> = _productList
 
        var product by mutableStateOf(Product())
