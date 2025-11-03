@@ -4,15 +4,15 @@ import androidx.room.PrimaryKey
 
 data class ProductMovement (
     val id: Int = 0,
-    val productId: Int,
+    val productId: Int = 0,
     val invoiceId: Int? = null,
     val invoiceItemId: Int? = null,
-    val movementType: String, // "SALE", "PURCHASE", "RETURN_IN", "ADJUSTMENT" ...
-    val quantity: Double,
-    val unitPrice: Double,
-    val totalAmount: Double,
+    val movementType: String = "SALE" ,
+    val quantity: Double = 0.0,
+    val unitPrice: Double = 0.0,
+    val totalAmount: Double = 0.0,
     val customerId: Int? = null,
-    val date: Long,
+    val date: Long = System.currentTimeMillis(),
     val note: String? = null,
     val createdAt: Long = System.currentTimeMillis()
 ){
