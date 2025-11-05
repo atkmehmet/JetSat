@@ -10,10 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetsat.repsentation.ViewModel.ProductViewModel
 import com.example.jetsat.repsentation.components.AppOutlinedTextField
+import com.example.jetsat.repsentation.components.CustomOutlinedTextField
 import com.example.jetsat.repsentation.components.SearchableDropdownTextField
 
 @Composable
@@ -46,21 +48,27 @@ fun ProductScreen( productViewModel: ProductViewModel = hiltViewModel()){
 
         Spacer(Modifier.height(8.dp))
 
-        AppOutlinedTextField(
+
+        CustomOutlinedTextField(
             value = productViewModel.product.productTakePrice.toString(),
-            onValueChange = productViewModel::onProductTakePriceChange,
+            onValueChange =  productViewModel::onProductTakePriceChange,
             label = "Product Take Price",
-            placeholder = "Product Take Price"
+            keyboardType = KeyboardType.Decimal,
+            prefix = "₺",
+            suffix = "TL"
         )
+
 
         Spacer(Modifier.height(8.dp))
 
 
-        AppOutlinedTextField(
+        CustomOutlinedTextField(
             value = productViewModel.product.productSoldPrice.toString(),
             onValueChange = productViewModel::onProductSoldPriceChange,
             label = "Product Sold Price",
-            placeholder = "Product Sold Price"
+            keyboardType = KeyboardType.Decimal,
+            prefix = "₺",
+            suffix = "TL"
         )
 
         Spacer(Modifier.height(8.dp))
