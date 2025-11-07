@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
     implementation(libs.camera.mlkit.vision)
+    implementation(libs.accompanist.permissions)
 
     //Barcode
     implementation(libs.barcode.scanning)

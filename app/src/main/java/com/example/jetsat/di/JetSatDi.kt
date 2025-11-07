@@ -2,6 +2,7 @@ package com.example.jetsat.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.jetsat.data.barcode.BarcodeScannerRepositoryImpl
 import com.example.jetsat.data.local.dao.CategoryDao
 import com.example.jetsat.data.local.dao.CustomerDao
 import com.example.jetsat.data.local.dao.InvoiceDao
@@ -15,6 +16,7 @@ import com.example.jetsat.data.local.repository.InvoiceRepositoryImpl
 import com.example.jetsat.data.local.repository.InvoiceTypeRepositoryImpl
 import com.example.jetsat.data.local.repository.ProductMovementRepositoryImpl
 import com.example.jetsat.data.local.repository.ProductRepositoryImpl
+import com.example.jetsat.domain.repository.BarcodeScannerRepository
 import com.example.jetsat.domain.repository.CategoryRepository
 import com.example.jetsat.domain.repository.CustomerRepository
 import com.example.jetsat.domain.repository.InvoiceRepository
@@ -100,6 +102,9 @@ class JetSatDi {
 
         return CategoryRepositoryImpl(categoryDao)
     }
-
+    @Provides
+    fun provideBarcodeScannerRepository(
+        @ApplicationContext context: Context
+    ): BarcodeScannerRepository = BarcodeScannerRepositoryImpl(context)
 
 }
