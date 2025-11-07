@@ -18,6 +18,11 @@ room = "2.6.1"
 # Dependency Injection
 dagger = "2.52"
 
+
+#Barcode and Camera
+barcode = "17.2.0"
+camera = "1.4.0"
+
 [libraries]
 # AndroidX Core
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +55,16 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "dagger" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
+
+#Camera
+camera-core = { group = "androidx.camera",name = "camera-core",version.ref = "camera"}
+camera-camera = { group = "androidx.camera",name = "camera-camera2", version.ref = "camera"}
+camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camera"}
+camera-view = { group = "androidx.camera",name = "camera-view", version.ref = "camera"}
+camera-mlkit-vision = { group = "androidx.camera", name = "camera-mlkit-vision", version.ref = "camera"}
+
+#Barcode
+barcode-scanning = { group = "com.google.mlkit",name = "barcode-scanning", version.ref = "barcode"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
