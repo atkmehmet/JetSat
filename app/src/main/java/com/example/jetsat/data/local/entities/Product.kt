@@ -20,5 +20,6 @@ data class ProductEntity(
     val productName:String,
     val productTakePrice:Double,
     val productSoldPrice:Double,
-   val categoryId: Int? = null
+    val productBarcode:String,
+    val categoryId: Int? = null
 )

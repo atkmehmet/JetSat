@@ -1,0 +1,78 @@
+package com.example.jetsat.repsentation.UI
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.jetsat.repsentation.UI.barcode.BarcodeScannerScreen
+import com.example.jetsat.repsentation.UI.barcode.CameraPermissionWrapper
+import com.example.jetsat.repsentation.ViewModel.JetSatViewModel
+
+@Composable
+fun ProductSearchScreen(
+    viewModel: JetSatViewModel = hiltViewModel()
+){
+
+     val product by viewModel.product.collectAsState()
+    val isScannerOpen by viewModel.isScannerOpen.collectAsState()
+    
+    Box(modifier = Modifier.fillMaxSize())
+    {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(onClick = { viewModel.openScanner() }) {
+                Text("📷 Barkod Oku")
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            if (product != null) {
+                Card(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    elevation = CardDefaults.cardElevation(4.dp)
+                ) {
+
+                    Column(Modifier.padding(16.dp)) {
+                        Text("Ürün Adı: ${product!!.productName}")
+                        Text("Barkod: ${product!!.productBarcode}")
+                        Text("Fiyat: ${product!!.productSoldPrice} tl")
+                    }
+
+                }
+
+            } else
+            {
+                Text("Henüz ürün seçilmedi.")
+            }
+
+        }
+
+        if (isScannerOpen) {
+            CameraPermissionWrapper {
+                BarcodeScannerScreen { scannedCode ->
+                    viewModel.onBarcodeScanned(scannedCode.toString())
+                }
+            }
+        }
+    }
+}

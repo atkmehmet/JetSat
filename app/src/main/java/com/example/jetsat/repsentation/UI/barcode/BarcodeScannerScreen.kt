@@ -13,11 +13,10 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.jetsat.repsentation.ViewModel.BarcodeScannerViewModel
 
 @Composable
 fun BarcodeScannerScreen(
-    viewModel: BarcodeScannerViewModel = hiltViewModel()
+    viewModel: (Any) -> Unit = hiltViewModel()
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current

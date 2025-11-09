@@ -11,5 +11,7 @@ interface ProductRepository {
 
     suspend fun deleteProduct(productId:Int)
 
+    suspend fun getProductByBarcode(barcode:String):Product
+
     fun getProducts():Flow<List<Product>>
 }

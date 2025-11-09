@@ -26,4 +26,8 @@ interface ProductDao {
          @Transaction
         @Query("select * from ProductEntity")
         fun getProductCategory():Flow<List<ProductWithCategory>>
+
+
+        @Query("SELECT * FROM ProductEntity WHERE productBarcode=:barcode")
+        suspend fun getProductByBarcode(barcode:String):ProductEntity
 }

@@ -9,6 +9,7 @@ fun Product.toProductEntity():ProductEntity{
         productName = productName,
         productTakePrice = productTakePrice,
         productSoldPrice = productSoldPrice,
+        productBarcode = productBarcode,
         categoryId = id
     )
 }
@@ -19,6 +20,7 @@ fun ProductEntity.toProduct():Product{
         productName = productName,
         productTakePrice = productTakePrice,
         productSoldPrice = productSoldPrice,
+        productBarcode = productBarcode,
         categoryId = id
     )
 }

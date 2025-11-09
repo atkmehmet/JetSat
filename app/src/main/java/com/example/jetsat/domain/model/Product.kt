@@ -5,6 +5,7 @@ data class Product (
     val productName:String = "",
     val productTakePrice:Double = 0.0,
     val productSoldPrice:Double = 0.0,
+    val productBarcode :String = "",
     val categoryId: Int = 0
 ) {
     fun isValid(): Boolean {
