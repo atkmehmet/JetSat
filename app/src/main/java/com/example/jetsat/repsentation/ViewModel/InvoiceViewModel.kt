@@ -9,6 +9,7 @@ import com.example.jetsat.data.local.repository.ProductMovementRepositoryImpl
 import com.example.jetsat.domain.model.Invoice
 import com.example.jetsat.domain.model.ProductMovement
 import com.example.jetsat.domain.repository.InvoiceRepository
+import com.example.jetsat.domain.repository.ProductMovementRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class InvoiceViewModel @Inject constructor(
     private val  invoiceRepository: InvoiceRepository,
-    private val productMovementRepositoryImpl: ProductMovementRepositoryImpl
+    private val productMovementRepository: ProductMovementRepository
 ) :ViewModel() {
     private val _invoiceList = MutableStateFlow<List<Invoice>> (emptyList())
 

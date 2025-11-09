@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetsat.repsentation.UI.InvoiceTypeScreen
+import com.example.jetsat.repsentation.UI.barcode.ScannerMainScreen
 import com.example.jetsat.ui.theme.JetSatTheme
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            InvoiceTypeScreen()
+         //   InvoiceTypeScreen()
+            ScannerMainScreen()
         }
     }
 }

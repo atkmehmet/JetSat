@@ -8,7 +8,7 @@ fun Invoice.toInvoiceEntity():InvoiceEntity{
     return InvoiceEntity(
         id = id,
         date = date,
-        type = type,
+        invoiceTypeId = invoiceTypeId,
         customerName = customerName,
         totalPrice = totalPrice
     )
@@ -18,7 +18,7 @@ fun InvoiceEntity.toInvoice():Invoice{
     return Invoice(
         id = id,
         date = date,
-        type = type,
+        invoiceTypeId = invoiceTypeId,
         customerName = customerName,
         totalPrice = totalPrice
     )
