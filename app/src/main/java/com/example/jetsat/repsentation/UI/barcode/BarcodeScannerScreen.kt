@@ -92,8 +92,8 @@ fun BarcodeScannerScreen(
         Spacer(Modifier.height(16.dp))
 
         Text("Eşleşen Ürünler:", style = MaterialTheme.typography.titleMedium)
-        searchResults.rEach { product ->
-            Text("• ${product.name} (${product.barcode})")
+
+            Text("• ${searchResults.productName} (${searchResults.productBarcode})")
         }
     }
 }
