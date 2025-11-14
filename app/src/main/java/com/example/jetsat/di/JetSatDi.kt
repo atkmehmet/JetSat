@@ -79,7 +79,7 @@ class JetSatDi {
 
     @Provides
     fun provideCustomerRepository(customerDao: CustomerDao):CustomerRepository{
-        return CustomerRepositoryImpl(customerDao)
+       // return CustomerRepositoryImpl(customerDao)
     }
 
     @Provides
