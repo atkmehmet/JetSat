@@ -18,18 +18,24 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetsat.repsentation.ViewModel.BarcodeViewModel
 import com.google.accompanist.permissions.*
-
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun BarcodeScannerScreen(
-    viewModel: BarcodeViewModel = hiltViewModel()
+    viewModel: BarcodeViewModel = hiltViewModel(),
+    onScanned: (String) -> Unit
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val permissionState = rememberPermissionState(Manifest.permission.CAMERA)
 
     val barcodeValue by viewModel.barcodeValue.collectAsState()
-    val searchResults by viewModel.searchResults.collectAsState()
+
+    // barkod okununca dışarı haber ver
+    LaunchedEffect(barcodeValue) {
+        if (barcodeValue.isNotBlank()) {
+            onScanned(barcodeValue)
+        }
+    }
 
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Button(
@@ -44,56 +50,45 @@ fun BarcodeScannerScreen(
         Text("Okunan Barkod: $barcodeValue")
 
         if (permissionState.status.isGranted) {
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .height(300.dp)
-            ) {
-                AndroidView(
-                    factory = { ctx ->
-                        val previewView = PreviewView(ctx)
-                        val cameraProviderFuture = ProcessCameraProvider.getInstance(ctx)
+            AndroidView(
+                factory = { ctx ->
+                    val previewView = PreviewView(ctx)
+                    val cameraProviderFuture = ProcessCameraProvider.getInstance(ctx)
 
-                        cameraProviderFuture.addListener({
-                            val cameraProvider = cameraProviderFuture.get()
-                            val preview = Preview.Builder().build().apply {
-                                setSurfaceProvider(previewView.surfaceProvider)
+                    cameraProviderFuture.addListener({
+                        val cameraProvider = cameraProviderFuture.get()
+                        val preview = Preview.Builder().build().apply {
+                            setSurfaceProvider(previewView.surfaceProvider)
+                        }
+
+                        val imageAnalyzer = ImageAnalysis.Builder().build().apply {
+                            setAnalyzer(
+                                ContextCompat.getMainExecutor(ctx)
+                            ) { imageProxy ->
+                                viewModel.scanBarcode(imageProxy)
                             }
+                        }
 
-                            val imageAnalyzer = ImageAnalysis.Builder().build().apply {
-                                setAnalyzer(
-                                    ContextCompat.getMainExecutor(ctx)
-                                ) { imageProxy ->
-                                    viewModel.scanBarcode(imageProxy)
-                                }
-                            }
+                        try {
+                            cameraProvider.unbindAll()
+                            cameraProvider.bindToLifecycle(
+                                lifecycleOwner,
+                                CameraSelector.DEFAULT_BACK_CAMERA,
+                                preview,
+                                imageAnalyzer
+                            )
+                        } catch (_: Exception) { }
 
-                            try {
-                                cameraProvider.unbindAll()
-                                cameraProvider.bindToLifecycle(
-                                    lifecycleOwner,
-                                    CameraSelector.DEFAULT_BACK_CAMERA,
-                                    preview,
-                                    imageAnalyzer
-                                )
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-                        }, ContextCompat.getMainExecutor(ctx))
+                    }, ContextCompat.getMainExecutor(ctx))
 
-                        previewView
-                    },
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+                    previewView
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+            )
         } else {
             Text("Kamera izni gerekli", color = MaterialTheme.colorScheme.error)
-        }
-
-        Spacer(Modifier.height(16.dp))
-
-        Text("Eşleşen Ürünler:", style = MaterialTheme.typography.titleMedium)
-
-            Text("• ${searchResults.productName} (${searchResults.productBarcode})")
         }
     }
 }
