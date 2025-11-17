@@ -39,7 +39,7 @@ fun ProductSearchScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(onClick = { viewModel.openScanner() }) {
-                Text("📷 Barkod Oku")
+                Text("📷 Barkod Read")
             }
 
             Spacer(modifier = Modifier.height(20.dp))
