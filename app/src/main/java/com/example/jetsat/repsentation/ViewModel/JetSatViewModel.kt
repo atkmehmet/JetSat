@@ -31,8 +31,10 @@ class JetSatViewModel @Inject constructor(
 
     fun onBarcodeScanned(barcode: String) {
         viewModelScope.launch {
-            val found = productRepository.getProductByBarcode(barcode)
-            _product.value = found
+        //    val found = productRepository.getProductByBarcode(barcode)
+            _product.value = Product(
+                productName = barcode
+            )
             closeScanner()
         }
     }

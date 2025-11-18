@@ -18,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.jetsat.repsentation.UI.barcode.BarcodeScannerScreen
+
 import com.example.jetsat.repsentation.UI.barcode.CameraPermissionWrapper
 import com.example.jetsat.repsentation.ViewModel.JetSatViewModel
 
@@ -69,9 +69,9 @@ fun ProductSearchScreen(
 
         if (isScannerOpen) {
             CameraPermissionWrapper {
-                BarcodeScannerScreen { scannedCode ->
-                    viewModel.onBarcodeScanned(scannedCode.toString())
-                }
+                //BarcodeScannerScreen { scannedCode ->
+                  //  viewModel.onBarcodeScanned(scannedCode.toString())
+               // }
             }
         }
     }

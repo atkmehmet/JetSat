@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetsat.repsentation.UI.InvoiceTypeScreen
 import com.example.jetsat.repsentation.UI.ProductSearchScreen
+import com.example.jetsat.repsentation.UI.barcode.ScannerMainScreen
 
 import com.example.jetsat.ui.theme.JetSatTheme
 import dagger.hilt.EntryPoint
@@ -25,8 +26,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
          //   InvoiceTypeScreen()
-           // ScannerMainScreen()
-            ProductSearchScreen()
+            ScannerMainScreen()
+           // ProductSearchScreen()
         }
     }
 }
