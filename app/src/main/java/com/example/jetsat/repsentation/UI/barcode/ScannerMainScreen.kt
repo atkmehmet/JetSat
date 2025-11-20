@@ -20,7 +20,7 @@ fun ScannerMainScreen(
 
     CameraPermissionWrapper {
         if (code == null) {
-            BarcodeScannerScreen()
+          //  BarcodeScannerScreen()
         } else {
             Text("Okunan barkod: $code", modifier = Modifier.padding(16.dp))
         }

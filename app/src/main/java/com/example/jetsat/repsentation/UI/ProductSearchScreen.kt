@@ -18,18 +18,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.app.presentation.barcode.BarcodeScannerScreen
 
 import com.example.jetsat.repsentation.UI.barcode.CameraPermissionWrapper
+import com.example.jetsat.repsentation.ViewModel.BarcodeScannerViewModel
 import com.example.jetsat.repsentation.ViewModel.JetSatViewModel
 
 @Composable
 fun ProductSearchScreen(
-    viewModel: JetSatViewModel = hiltViewModel()
+    viewModel: JetSatViewModel = hiltViewModel(),
+    viewModelBarcode: BarcodeScannerViewModel = hiltViewModel()
 ){
 
      val product by viewModel.product.collectAsState()
     val isScannerOpen by viewModel.isScannerOpen.collectAsState()
-    
+    val code by viewModelBarcode.scannedCode.collectAsState()
+
     Box(modifier = Modifier.fillMaxSize())
     {
         Column(
@@ -38,7 +42,7 @@ fun ProductSearchScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = { viewModel.openScanner() }) {
+            Button(onClick = { viewModel.openScanner()  }) {
                 Text("📷 Barkod Read")
             }
 
@@ -53,7 +57,7 @@ fun ProductSearchScreen(
                 ) {
 
                     Column(Modifier.padding(16.dp)) {
-                        Text("Ürün Adı: ${product!!.productName}")
+                        Text("Ürün Adı: ${code}")
                         Text("Barkod: ${product!!.productBarcode}")
                         Text("Fiyat: ${product!!.productSoldPrice} tl")
                     }
@@ -69,9 +73,7 @@ fun ProductSearchScreen(
 
         if (isScannerOpen) {
             CameraPermissionWrapper {
-                //BarcodeScannerScreen { scannedCode ->
-                  //  viewModel.onBarcodeScanned(scannedCode.toString())
-               // }
+                BarcodeScannerScreen ( onClose = { viewModel.closeScanner() })
             }
         }
     }
