@@ -30,11 +30,11 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-
 @Composable
 fun BarcodeScannerScreen(
     viewModelBarcode: BarcodeScannerViewModel = hiltViewModel(),
-    onClose: () -> Unit
+    onClose: () -> Unit,
+    onScanned: (String) -> Unit
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
@@ -43,14 +43,14 @@ fun BarcodeScannerScreen(
 
     val previewView = remember { PreviewView(context) }
 
-    // CameraProvider’ı ilk seferde yükle
     val cameraProviderFuture = remember {
         ProcessCameraProvider.getInstance(context)
     }
 
     DisposableEffect(Unit) {
-        var cameraProvider: ProcessCameraProvider? = null
+
         val executor = ContextCompat.getMainExecutor(context)
+        var cameraProvider: ProcessCameraProvider? = null
 
         cameraProviderFuture.addListener({
             cameraProvider = cameraProviderFuture.get()
@@ -59,11 +59,15 @@ fun BarcodeScannerScreen(
                 setSurfaceProvider(previewView.surfaceProvider)
             }
 
-            val analyzer = ImageAnalysis.Builder().build().apply {
-                setAnalyzer(executor) { imageProxy ->
-                    viewModelBarcode.scanBarcode(imageProxy)
+            val analyzer = ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .build()
+                .apply {
+                    setAnalyzer(executor) { imageProxy ->
+                        viewModelBarcode.scanBarcode(imageProxy)
+                        imageProxy.close()
+                    }
                 }
-            }
 
             try {
                 cameraProvider?.unbindAll()
@@ -79,9 +83,10 @@ fun BarcodeScannerScreen(
 
         }, executor)
 
-        // ❗ Kamera kapanma kısmı burada garanti edilir
         onDispose {
-            cameraProviderFuture.get().unbindAll()
+            try {
+                cameraProviderFuture.get().unbindAll()
+            } catch (_: Exception) {}
         }
     }
 
@@ -92,7 +97,7 @@ fun BarcodeScannerScreen(
             modifier = Modifier.fillMaxSize()
         )
 
-        // Kapatma tuşu
+        // Üstte kapatma tuşu
         IconButton(
             onClick = onClose,
             modifier = Modifier
@@ -103,9 +108,10 @@ fun BarcodeScannerScreen(
         }
     }
 
-    // Barkod okundu → ekran kapansın
+    // barkod okununca ekran kapanır
     LaunchedEffect(code) {
         if (!code.isNullOrEmpty()) {
+            onScanned(code!!)
             onClose()
         }
     }
