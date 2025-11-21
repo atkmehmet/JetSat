@@ -1,5 +1,6 @@
 package com.example.app.presentation.barcode
 
+import android.util.Size
 import androidx.compose.ui.unit.dp
 import com.example.jetsat.repsentation.ViewModel.BarcodeScannerViewModel
 
@@ -30,6 +31,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+
 @Composable
 fun BarcodeScannerScreen(
     viewModelBarcode: BarcodeScannerViewModel = hiltViewModel(),
@@ -61,11 +63,11 @@ fun BarcodeScannerScreen(
 
             val analyzer = ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .setTargetResolution(Size(1280, 720)) // → Okuma hızını artırır
                 .build()
                 .apply {
                     setAnalyzer(executor) { imageProxy ->
-                        viewModelBarcode.scanBarcode(imageProxy)
-                        imageProxy.close()
+                        viewModelBarcode.scanBarcode(imageProxy) // ❗ close ETME!
                     }
                 }
 

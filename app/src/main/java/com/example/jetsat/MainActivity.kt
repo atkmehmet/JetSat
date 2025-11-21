@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
          //   InvoiceTypeScreen()
-        //    ScannerMainScreen()
+          // ScannerMainScreen()
             ProductSearchScreen()
         }
     }
