@@ -154,7 +154,7 @@ fun ProductScreen( productViewModel: ProductViewModel = hiltViewModel()){
                             }
 
                             // SİL BUTONU
-                            IconButton(onClick = { productViewModel.deleteProduct(item) }) {
+                            IconButton(onClick = { productViewModel.onDeleteProduct(item.id) }) {
                                 Icon(
                                     imageVector = Icons.Default.Delete,
                                     contentDescription = "Delete"

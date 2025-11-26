@@ -86,4 +86,23 @@ class ProductViewModel @Inject constructor(
             categoryId = categoryId.toInt()
         )
     }
+
+    fun onDeleteProduct(productId:Int){
+        viewModelScope.launch {
+            productRepository.deleteProduct(productId)
+        }
+
+    }
+
+    fun onEditProduct(productEx: Product){
+
+        product = product.copy(
+            id = productEx.id,
+            productSoldPrice = productEx.productSoldPrice,
+            productName = productEx.productName,
+            productBarcode = productEx.productBarcode,
+            productTakePrice = productEx.productTakePrice,
+            categoryId = productEx.categoryId
+        )
+    }
 }
