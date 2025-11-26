@@ -40,6 +40,7 @@ fun ProductScreen( productViewModel: ProductViewModel = hiltViewModel()){
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
+            .padding(top= 10.dp)
     ) {
 
         Text(
