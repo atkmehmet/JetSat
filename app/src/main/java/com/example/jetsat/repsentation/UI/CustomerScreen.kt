@@ -82,6 +82,10 @@ fun CustomerScreen(
         ) {
             Text("Save")
         }
+        
+        Spacer(Modifier.height(8.dp))
+        
+        Text(text = "Customer List")
     }
 
 }

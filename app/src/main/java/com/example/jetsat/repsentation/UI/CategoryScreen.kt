@@ -98,10 +98,10 @@ fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
 
                          }
                              Row {
-                                 IconButton(onClick = {  categoryViewModel.OnDeleteCategory(item.id)}) {
+                                 IconButton(onClick = {  categoryViewModel.onDeleteCategory(item.id)}) {
                                      Icon(imageVector = Icons.Default.Edit, contentDescription ="Edit" )
                                  }
-                                 IconButton(onClick = { categoryViewModel. }) {
+                                 IconButton(onClick = { categoryViewModel.onEditCategory(item) }) {
                                      Icon(imageVector = Icons.Default.Delete, contentDescription ="Delete" )
                                  }
 
