@@ -39,11 +39,18 @@ import javax.inject.Inject
         }
     }
 
-    fun deleteCategory(id:Int){
+    fun onDeleteCategory(id:Int){
         viewModelScope.launch {
             categoryRepository.deleteCategory(id)
         }
     }
+    fun onEditCategory(category: Category){
+        this.category = category.copy(
+            id = category.id,
+            categoryName = category.categoryName
+        )
+    }
+
     fun onNameChange(newName:String){
         category = category.copy(
             categoryName = newName
