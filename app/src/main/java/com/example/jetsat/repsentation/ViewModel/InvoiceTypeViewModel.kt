@@ -38,10 +38,20 @@ class InvoiceTypeViewModel @Inject constructor(
         }
     }
 
-    fun delete(id:Int){
+    fun onDeleteInvoiceType(id:Int){
         viewModelScope.launch {
             invoiceTypeRepository.deleteInvoiceType(id)
         }
+    }
+
+    fun onEditInvoiceType(invoiceTypeEdit: InvoiceType){
+
+        invoiceType = invoiceType.copy(
+            id = invoiceTypeEdit.id,
+            name = invoiceTypeEdit.name,
+            description = invoiceTypeEdit.description,
+            code = invoiceTypeEdit.code
+        )
     }
 
     fun onCodeChange(newCode:String){

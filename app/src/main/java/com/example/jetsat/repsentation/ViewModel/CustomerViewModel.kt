@@ -34,10 +34,21 @@ class CustomerViewModel @Inject constructor (
         }
     }
 
-    fun deleteCustomer(id:Int){
+    fun onDeleteCustomer(id:Int){
         viewModelScope.launch {
             customerRepository.deleteCustomer(id)
         }
+    }
+
+    fun onEditCustomer(customerEdit: Customer){
+
+        customer = customer.copy(
+            id = customerEdit.id,
+            email = customerEdit.email,
+            name = customerEdit.name,
+            phone = customerEdit.phone,
+            address = customerEdit.address
+        )
     }
 
     fun onNameChange(newName:String){

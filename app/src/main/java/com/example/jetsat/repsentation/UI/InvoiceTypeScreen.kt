@@ -1,10 +1,15 @@
 package com.example.jetsat.repsentation.UI
 
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,12 +21,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetsat.domain.model.InvoiceType
 import com.example.jetsat.repsentation.ViewModel.InvoiceTypeViewModel
 import com.example.jetsat.repsentation.components.AppOutlinedTextField
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 
 @Composable
 fun InvoiceTypeScreen(
     viewModel: InvoiceTypeViewModel = hiltViewModel(),
 ) {
 
+    val invoiceType by viewModel.invoiceTypeList.collectAsState()
 
     Column(
         modifier = Modifier
@@ -70,5 +87,63 @@ fun InvoiceTypeScreen(
         ) {
             Text("Save")
         }
+
+        Spacer(Modifier.height(8.dp))
+
+        Text(text = "Invoice Type List",
+            style = MaterialTheme.typography.titleMedium)
+        LazyColumn(modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp))
+        {
+            items(items = invoiceType,
+                key = {it.id}){ item->
+
+                Card (modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                     elevation = CardDefaults.cardElevation(4.dp)){
+                    Row (modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                        ){
+
+                        Column (modifier = Modifier.weight(1f)){
+
+                            Text(text = "Name: ${item.id}")
+                            Text(text = "Name: ${item.name}")
+                            Text(text = "Name: ${item.code}")
+                            Text(text = "Name: ${item.description}")
+                        }
+
+                        Row {
+
+                            // DÜZENLE BUTONU
+                            IconButton(onClick = { viewModel. onEditInvoiceType(item)}) {
+                                Icon(
+                                    imageVector = Icons.Default.Edit,
+                                    contentDescription = "Edit"
+                                )
+                            }
+
+                            // SİL BUTONU
+                            IconButton(onClick = { viewModel.onDeleteInvoiceType(item.id) }) {
+                                Icon(
+                                    imageVector = Icons.Default.Delete,
+                                    contentDescription = "Delete"
+                                )
+                            }
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+
+
+
     }
 }
