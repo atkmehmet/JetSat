@@ -69,11 +69,13 @@ fun ProductSearchScreen(
                         .padding(8.dp),
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
+                    viewModel.onBarcodeScanned(code?:"")
                     Column(Modifier.padding(16.dp)) {
-                        Text("Ürün Adı: ${code}")
+                        Text("Ürün Adı: ${product.productName}")
                         Text("Barkod: ${product!!.productBarcode}")
                         Text("Fiyat: ${product!!.productSoldPrice} tl")
                     }
+                    viewModel.onCleanProduct()
                 }
             } else {
                 Text("Henüz ürün seçilmedi.")
