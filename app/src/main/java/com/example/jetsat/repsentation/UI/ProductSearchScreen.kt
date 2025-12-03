@@ -1,5 +1,6 @@
 package com.example.jetsat.repsentation.UI
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,11 @@ import com.example.app.presentation.barcode.BarcodeScannerScreen
 import com.example.jetsat.repsentation.UI.barcode.CameraPermissionWrapper
 import com.example.jetsat.repsentation.ViewModel.BarcodeScannerViewModel
 import com.example.jetsat.repsentation.ViewModel.JetSatViewModel
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+
 @Composable
 fun ProductSearchScreen(
     viewModel: JetSatViewModel = hiltViewModel(),
@@ -88,8 +94,7 @@ fun ProductSearchScreen(
             LazyColumn(
                 modifier = Modifier.weight(1f)
             ) {
-                items(item = productList
-                ,key =(it.id) ) { item ->
+                items(items = productList) { item ->
 
                     Card(
                         Modifier
