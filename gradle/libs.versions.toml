@@ -74,6 +74,9 @@ barcode-scanning = { group = "com.google.mlkit",name = "barcode-scanning", versi
 #Navigation
 navigation-compose = { group = "androidx.navigation",name = "navigation-compose",version.ref = "navigation"}
 
+#Icons
+material-icons = { group = "androidx.compose.material",name = "material-icons-extended"}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

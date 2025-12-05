@@ -17,8 +17,8 @@ fun AppBottomBar(navController: NavHostController) {
         Screen.Product,
         Screen.InvoiceType,
         Screen.Category,
-        Screen.Sales,
-        Screen.Barcode
+        Screen.Sales
+        //Screen.Barcode
     )
 
     NavigationBar {
