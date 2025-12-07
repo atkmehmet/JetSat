@@ -1,6 +1,8 @@
 package com.example.jetsat.repsentation.UI
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,6 +28,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetsat.repsentation.ViewModel.CategoryViewModel
@@ -34,10 +37,18 @@ import com.example.jetsat.repsentation.components.AppOutlinedTextField
 @Composable
 fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
     val categories by categoryViewModel.categories.collectAsState()
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF5F5F5)) // Soft gray background
+
+    ) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(8.dp)
+            .padding(16.dp,vertical = 12.dp)
     ) {
         Text(
             text = "Add Category ",
@@ -117,4 +128,5 @@ fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
 
     }
 
+   }
 }

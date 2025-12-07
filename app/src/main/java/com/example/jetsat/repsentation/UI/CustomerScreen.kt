@@ -1,6 +1,8 @@
 package com.example.jetsat.repsentation.UI
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,6 +31,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.motionEventSpy
 
 @Composable
@@ -36,127 +39,140 @@ fun CustomerScreen(
     customerViewModel: CustomerViewModel = hiltViewModel()
 ){
     val categories by customerViewModel.customerList.collectAsState()
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .background(Color(0xFFF5F5F5)) // Soft gray background
+
     ) {
 
-        Text(
-            text = "Add Category ",
-            style = MaterialTheme.typography.headlineSmall
-        )
 
-        AppOutlinedTextField(
-            value = customerViewModel.customer.id.toString(),
-            onValueChange =null ,
-            label = " Customer Id",
-            placeholder = " Customer Id"
-        )
-        Spacer(Modifier.height(8.dp))
-
-
-        AppOutlinedTextField(
-            value = customerViewModel.customer.name,
-            onValueChange = customerViewModel::onNameChange ,
-            label = " Customer Name",
-            placeholder = " Customer Name"
-        )
-        Spacer(Modifier.height(8.dp))
-
-        AppOutlinedTextField(
-            value = customerViewModel.customer.email?:"",
-            onValueChange = customerViewModel::onEmailChange ,
-            label = " Customer Email",
-            placeholder = " Customer Email"
-        )
-
-        Spacer(Modifier.height(8.dp))
-
-
-        AppOutlinedTextField(
-            value = customerViewModel.customer.address?:"",
-            onValueChange = customerViewModel::onAddressChange ,
-            label = " Customer Address",
-            placeholder = " Customer Address"
-        )
-        Spacer(Modifier.height(8.dp))
-
-        AppOutlinedTextField(
-            value = customerViewModel.customer.phone,
-            onValueChange = customerViewModel::onPhoneChange ,
-            label = " Customer Phone",
-            placeholder = " Customer Phone"
-        )
-
-        Spacer(Modifier.height(8.dp))
-        Button(
-            onClick = { customerViewModel.saveUpdateCustomer() },
-            enabled = customerViewModel.customer.isValid(),
-            modifier = Modifier.align(Alignment.End)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp, vertical = 12.dp)
         ) {
-            Text("Save")
-        }
-        
-        Spacer(Modifier.height(8.dp))
-        
-        Text(text = "Customer List",
-            style = MaterialTheme.typography.titleMedium
+
+            Text(
+                text = "Add Category ",
+                style = MaterialTheme.typography.headlineSmall
             )
 
-        LazyColumn(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp))
-        {
-            items( items = categories,
-                key = { it.id}
-            ){item ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp),
-                    elevation = CardDefaults.cardElevation(4.dp)
-                ) {
-                    Row (modifier = Modifier.fillMaxWidth()
-                        .padding(12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                         ){
+            AppOutlinedTextField(
+                value = customerViewModel.customer.id.toString(),
+                onValueChange = null,
+                label = " Customer Id",
+                placeholder = " Customer Id"
+            )
+            Spacer(Modifier.height(8.dp))
 
 
-                        Column ( modifier = Modifier.weight(1f)){
-                            Text(text = "Name: ${item.id}")
-                            Text(text = "Name: ${item.name}")
-                            Text(text = "Name: ${item.email}")
-                            Text(text = "Name: ${item.phone}")
-                        }
+            AppOutlinedTextField(
+                value = customerViewModel.customer.name,
+                onValueChange = customerViewModel::onNameChange,
+                label = " Customer Name",
+                placeholder = " Customer Name"
+            )
+            Spacer(Modifier.height(8.dp))
+
+            AppOutlinedTextField(
+                value = customerViewModel.customer.email ?: "",
+                onValueChange = customerViewModel::onEmailChange,
+                label = " Customer Email",
+                placeholder = " Customer Email"
+            )
+
+            Spacer(Modifier.height(8.dp))
 
 
+            AppOutlinedTextField(
+                value = customerViewModel.customer.address ?: "",
+                onValueChange = customerViewModel::onAddressChange,
+                label = " Customer Address",
+                placeholder = " Customer Address"
+            )
+            Spacer(Modifier.height(8.dp))
 
-                        Row {
+            AppOutlinedTextField(
+                value = customerViewModel.customer.phone,
+                onValueChange = customerViewModel::onPhoneChange,
+                label = " Customer Phone",
+                placeholder = " Customer Phone"
+            )
 
-                            // DÜZENLE BUTONU
-                            IconButton(onClick = { customerViewModel. onEditCustomer(item)}) {
-                                Icon(
-                                    imageVector = Icons.Default.Edit,
-                                    contentDescription = "Edit"
-                                )
-                            }
-
-                            // SİL BUTONU
-                            IconButton(onClick = { customerViewModel.onDeleteCustomer(item.id) }) {
-                                Icon(
-                                    imageVector = Icons.Default.Delete,
-                                    contentDescription = "Delete"
-                                )
-                            }
-                        }
-                    }
-
-
-                }
+            Spacer(Modifier.height(8.dp))
+            Button(
+                onClick = { customerViewModel.saveUpdateCustomer() },
+                enabled = customerViewModel.customer.isValid(),
+                modifier = Modifier.align(Alignment.End)
+            ) {
+                Text("Save")
             }
 
-        }
-    }
+            Spacer(Modifier.height(8.dp))
 
+            Text(
+                text = "Customer List",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+            )
+            {
+                items(items = categories,
+                    key = { it.id }
+                ) { item ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp),
+                        elevation = CardDefaults.cardElevation(4.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+
+
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(text = "Name: ${item.id}")
+                                Text(text = "Name: ${item.name}")
+                                Text(text = "Name: ${item.email}")
+                                Text(text = "Name: ${item.phone}")
+                            }
+
+
+
+                            Row {
+
+                                // DÜZENLE BUTONU
+                                IconButton(onClick = { customerViewModel.onEditCustomer(item) }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Edit,
+                                        contentDescription = "Edit"
+                                    )
+                                }
+
+                                // SİL BUTONU
+                                IconButton(onClick = { customerViewModel.onDeleteCustomer(item.id) }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Delete,
+                                        contentDescription = "Delete"
+                                    )
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+        }
+
+    }
 }

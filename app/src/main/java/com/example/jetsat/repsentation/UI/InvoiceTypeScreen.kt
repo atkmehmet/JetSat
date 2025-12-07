@@ -1,7 +1,9 @@
 package com.example.jetsat.repsentation.UI
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,6 +34,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun InvoiceTypeScreen(
@@ -39,111 +42,124 @@ fun InvoiceTypeScreen(
 ) {
 
     val invoiceType by viewModel.invoiceTypeList.collectAsState()
-
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .background(Color(0xFFF5F5F5)) // Soft gray background
+
     ) {
-        Text(
-            text = "Add Invoice Type",
-            style = MaterialTheme.typography.headlineSmall
-        )
 
-        Spacer(Modifier.height(16.dp))
 
-        AppOutlinedTextField(
-            value = viewModel.invoiceType.code,
-                onValueChange = viewModel::onCodeChange,
-            label = "Code",
-            placeholder = "Enter code"
-        )
-
-        Spacer(Modifier.height(8.dp))
-
-        AppOutlinedTextField(
-            value = viewModel.invoiceType.name,
-            onValueChange = viewModel::onNameChange,
-            label = "Name",
-            placeholder = "Enter name"
-        )
-
-        Spacer(Modifier.height(8.dp))
-
-        AppOutlinedTextField(
-            value = viewModel.invoiceType.description?:"veri girişi",
-            onValueChange = viewModel::onDescriptionChange,
-            label = "Description",
-            placeholder = "Optional",
-            singleLine = false
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        Button(
-            onClick = { viewModel.saveUpdate() },
-            enabled = viewModel.invoiceType.isValid(),
-            modifier = Modifier.align(Alignment.End)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp, vertical = 12.dp)
         ) {
-            Text("Save")
-        }
+            Text(
+                text = "Add Invoice Type",
+                style = MaterialTheme.typography.headlineSmall
+            )
 
-        Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(16.dp))
 
-        Text(text = "Invoice Type List",
-            style = MaterialTheme.typography.titleMedium)
-        LazyColumn(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp))
-        {
-            items(items = invoiceType,
-                key = {it.id}){ item->
+            AppOutlinedTextField(
+                value = viewModel.invoiceType.code,
+                onValueChange = viewModel::onCodeChange,
+                label = "Code",
+                placeholder = "Enter code"
+            )
 
-                Card (modifier = Modifier
+            Spacer(Modifier.height(8.dp))
+
+            AppOutlinedTextField(
+                value = viewModel.invoiceType.name,
+                onValueChange = viewModel::onNameChange,
+                label = "Name",
+                placeholder = "Enter name"
+            )
+
+            Spacer(Modifier.height(8.dp))
+
+            AppOutlinedTextField(
+                value = viewModel.invoiceType.description ?: "veri girişi",
+                onValueChange = viewModel::onDescriptionChange,
+                label = "Description",
+                placeholder = "Optional",
+                singleLine = false
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Button(
+                onClick = { viewModel.saveUpdate() },
+                enabled = viewModel.invoiceType.isValid(),
+                modifier = Modifier.align(Alignment.End)
+            ) {
+                Text("Save")
+            }
+
+            Spacer(Modifier.height(8.dp))
+
+            Text(
+                text = "Invoice Type List",
+                style = MaterialTheme.typography.titleMedium
+            )
+            LazyColumn(
+                modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
-                     elevation = CardDefaults.cardElevation(4.dp)){
-                    Row (modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                        ){
+                    .padding(8.dp)
+            )
+            {
+                items(items = invoiceType,
+                    key = { it.id }) { item ->
 
-                        Column (modifier = Modifier.weight(1f)){
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        elevation = CardDefaults.cardElevation(4.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
 
-                            Text(text = "Name: ${item.id}")
-                            Text(text = "Name: ${item.name}")
-                            Text(text = "Name: ${item.code}")
-                            Text(text = "Name: ${item.description}")
-                        }
+                            Column(modifier = Modifier.weight(1f)) {
 
-                        Row {
-
-                            // DÜZENLE BUTONU
-                            IconButton(onClick = { viewModel. onEditInvoiceType(item)}) {
-                                Icon(
-                                    imageVector = Icons.Default.Edit,
-                                    contentDescription = "Edit"
-                                )
+                                Text(text = "Name: ${item.id}")
+                                Text(text = "Name: ${item.name}")
+                                Text(text = "Name: ${item.code}")
+                                Text(text = "Name: ${item.description}")
                             }
 
-                            // SİL BUTONU
-                            IconButton(onClick = { viewModel.onDeleteInvoiceType(item.id) }) {
-                                Icon(
-                                    imageVector = Icons.Default.Delete,
-                                    contentDescription = "Delete"
-                                )
+                            Row {
+
+                                // DÜZENLE BUTONU
+                                IconButton(onClick = { viewModel.onEditInvoiceType(item) }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Edit,
+                                        contentDescription = "Edit"
+                                    )
+                                }
+
+                                // SİL BUTONU
+                                IconButton(onClick = { viewModel.onDeleteInvoiceType(item.id) }) {
+                                    Icon(
+                                        imageVector = Icons.Default.Delete,
+                                        contentDescription = "Delete"
+                                    )
+                                }
                             }
                         }
+
                     }
 
                 }
-
             }
+
+
         }
-
-
-
-
     }
 }

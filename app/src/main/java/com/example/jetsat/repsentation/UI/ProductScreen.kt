@@ -45,11 +45,12 @@ fun ProductScreen(productViewModel: ProductViewModel = hiltViewModel()) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFF5F5F5)) // Soft gray background
-            .padding(16.dp)
+
     ) {
 
         Column(
             modifier = Modifier.fillMaxSize()
+                .padding(16.dp, vertical = 12.dp)
         ) {
 
             Text(
