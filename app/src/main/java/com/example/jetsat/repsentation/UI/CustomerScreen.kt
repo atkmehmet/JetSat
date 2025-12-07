@@ -33,74 +33,78 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.motionEventSpy
-
 @Composable
 fun CustomerScreen(
     customerViewModel: CustomerViewModel = hiltViewModel()
-){
-    val categories by customerViewModel.customerList.collectAsState()
+) {
+
+    val customers by customerViewModel.customerList.collectAsState()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5)) // Soft gray background
-
+            .background(Color(0xFFF5F5F5)) // Soft gray
     ) {
-
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp, vertical = 12.dp)
+                .padding(16.dp, 12.dp)
         ) {
 
+            // TITLE
             Text(
-                text = "Add Category ",
+                text = "Add Customer",
                 style = MaterialTheme.typography.headlineSmall
             )
 
+            // ID (readonly)
             AppOutlinedTextField(
                 value = customerViewModel.customer.id.toString(),
                 onValueChange = null,
-                label = " Customer Id",
-                placeholder = " Customer Id"
+                label = "Customer Id",
+                placeholder = "Customer Id"
             )
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(12.dp))
 
-
+            // NAME
             AppOutlinedTextField(
                 value = customerViewModel.customer.name,
                 onValueChange = customerViewModel::onNameChange,
-                label = " Customer Name",
-                placeholder = " Customer Name"
+                label = "Customer Name",
+                placeholder = "Customer Name"
             )
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(12.dp))
 
+            // EMAIL
             AppOutlinedTextField(
                 value = customerViewModel.customer.email ?: "",
                 onValueChange = customerViewModel::onEmailChange,
-                label = " Customer Email",
-                placeholder = " Customer Email"
+                label = "Customer Email",
+                placeholder = "Customer Email"
             )
+            Spacer(Modifier.height(12.dp))
 
-            Spacer(Modifier.height(8.dp))
-
-
+            // ADDRESS
             AppOutlinedTextField(
                 value = customerViewModel.customer.address ?: "",
                 onValueChange = customerViewModel::onAddressChange,
-                label = " Customer Address",
-                placeholder = " Customer Address"
+                label = "Customer Address",
+                placeholder = "Customer Address"
             )
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(12.dp))
 
+            // PHONE
             AppOutlinedTextField(
                 value = customerViewModel.customer.phone,
                 onValueChange = customerViewModel::onPhoneChange,
-                label = " Customer Phone",
-                placeholder = " Customer Phone"
+                label = "Customer Phone",
+                placeholder = "Customer Phone"
             )
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(16.dp))
+
+            // SAVE BUTTON
             Button(
                 onClick = { customerViewModel.saveUpdateCustomer() },
                 enabled = customerViewModel.customer.isValid(),
@@ -109,70 +113,62 @@ fun CustomerScreen(
                 Text("Save")
             }
 
-            Spacer(Modifier.height(8.dp))
+            Spacer(Modifier.height(20.dp))
 
+            // LIST TITLE
             Text(
                 text = "Customer List",
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.headlineSmall
             )
+
+            Spacer(Modifier.height(8.dp))
 
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 8.dp)
-            )
-            {
-                items(items = categories,
+            ) {
+
+                items(
+                    items = customers,
                     key = { it.id }
                 ) { item ->
+
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(4.dp),
+                            .padding(vertical = 6.dp),
                         elevation = CardDefaults.cardElevation(4.dp)
                     ) {
+
                         Row(
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .padding(12.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
 
-
                             Column(modifier = Modifier.weight(1f)) {
-                                Text(text = "Name: ${item.id}")
-                                Text(text = "Name: ${item.name}")
-                                Text(text = "Name: ${item.email}")
-                                Text(text = "Name: ${item.phone}")
+                                Text("ID: ${item.id}")
+                                Text("Name: ${item.name}")
+                                Text("Email: ${item.email ?: "-"}")
+                                Text("Phone: ${item.phone}")
+                                Text("Address: ${item.address ?: "-"}")
                             }
-
-
 
                             Row {
 
-                                // DÜZENLE BUTONU
                                 IconButton(onClick = { customerViewModel.onEditCustomer(item) }) {
-                                    Icon(
-                                        imageVector = Icons.Default.Edit,
-                                        contentDescription = "Edit"
-                                    )
+                                    Icon(Icons.Default.Edit, contentDescription = "Edit")
                                 }
 
-                                // SİL BUTONU
                                 IconButton(onClick = { customerViewModel.onDeleteCustomer(item.id) }) {
-                                    Icon(
-                                        imageVector = Icons.Default.Delete,
-                                        contentDescription = "Delete"
-                                    )
+                                    Icon(Icons.Default.Delete, contentDescription = "Delete")
                                 }
                             }
                         }
-
-
                     }
                 }
-
             }
         }
-
     }
 }

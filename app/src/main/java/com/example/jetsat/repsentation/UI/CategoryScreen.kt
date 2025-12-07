@@ -33,46 +33,43 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.jetsat.repsentation.ViewModel.CategoryViewModel
 import com.example.jetsat.repsentation.components.AppOutlinedTextField
+import com.example.jetsat.repsentation.components.ScreenContainer
+import com.example.jetsat.repsentation.components.StylishCard
 
 @Composable
-fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
+fun CategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
+
     val categories by categoryViewModel.categories.collectAsState()
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF5F5F5)) // Soft gray background
+    ScreenContainer {
 
-    ) {
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp,vertical = 12.dp)
-    ) {
+        // Başlık
         Text(
-            text = "Add Category ",
+            text = "Add Category",
             style = MaterialTheme.typography.headlineSmall
         )
 
+        // Category ID
         AppOutlinedTextField(
             value = categoryViewModel.category.id.toString(),
-            onValueChange =null ,
-            label = " code",
-            placeholder = " code"
+            onValueChange = null,
+            label = "Code",
+            placeholder = "Code"
         )
 
         Spacer(Modifier.height(16.dp))
 
+        // Category Name
         AppOutlinedTextField(
             value = categoryViewModel.category.categoryName,
             onValueChange = categoryViewModel::onNameChange,
-            label = " Name",
+            label = "Name",
             placeholder = "Enter Name"
         )
 
         Spacer(Modifier.height(16.dp))
 
+        // Kaydet butonu
         Button(
             onClick = { categoryViewModel.saveUpdate() },
             enabled = categoryViewModel.category.categoryName.isNotEmpty(),
@@ -81,52 +78,45 @@ fun CategoryScreen( categoryViewModel: CategoryViewModel = hiltViewModel()){
             Text("Save")
         }
 
+        Spacer(Modifier.height(12.dp))
+
+        // Liste başlık
+        Text(
+            text = "Category List",
+            style = MaterialTheme.typography.headlineLarge
+        )
+
         Spacer(Modifier.height(8.dp))
 
-        Text(text = "Category List",
-            style = MaterialTheme.typography.headlineLarge)
+        // Liste
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        ) {
 
+            items(categories) { item ->
 
-        LazyColumn(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)) {
+                StylishCard {
 
-                 items(
-                     items = categories
-                 ){item ->
-                     Card(modifier = Modifier
-                         .fillMaxWidth()
-                         .padding(8.dp),
-                         elevation = CardDefaults.cardElevation(4.dp)
-                     ) {
-                         Row (modifier = Modifier
-                             .fillMaxWidth()
-                             .padding(8.dp),
-                             horizontalArrangement = Arrangement.SpaceBetween){
-                             Column(modifier = Modifier.weight(1f)) {
-                                 Text(text = "Id: ${item.id}")
-                                 Text(text = "Name: ${item.categoryName}")
+                    Column(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Id: ${item.id}")
+                        Text("Name: ${item.categoryName}")
+                    }
 
-                         }
-                             Row {
-                                 IconButton(onClick = {  categoryViewModel.onDeleteCategory(item.id)}) {
-                                     Icon(imageVector = Icons.Default.Edit, contentDescription ="Edit" )
-                                 }
-                                 IconButton(onClick = { categoryViewModel.onEditCategory(item) }) {
-                                     Icon(imageVector = Icons.Default.Delete, contentDescription ="Delete" )
-                                 }
+                    Row {
+                        IconButton(onClick = { categoryViewModel.onEditCategory(item) }) {
+                            Icon(Icons.Default.Edit, contentDescription = "Edit")
+                        }
 
-                             }
-
-                         }
-
-                     }
-
-                 }
+                        IconButton(onClick = { categoryViewModel.onDeleteCategory(item.id) }) {
+                            Icon(Icons.Default.Delete, contentDescription = "Delete")
+                        }
+                    }
+                }
+            }
         }
-
-
     }
-
-   }
 }
