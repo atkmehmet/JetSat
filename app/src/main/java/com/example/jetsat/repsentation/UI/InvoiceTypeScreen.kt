@@ -35,6 +35,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
+import com.example.jetsat.repsentation.components.ScreenContainer
 
 @Composable
 fun InvoiceTypeScreen(
@@ -42,19 +43,7 @@ fun InvoiceTypeScreen(
 ) {
 
     val invoiceType by viewModel.invoiceTypeList.collectAsState()
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF5F5F5)) // Soft gray background
-
-    ) {
-
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp, vertical = 12.dp)
-        ) {
+    ScreenContainer {
             Text(
                 text = "Add Invoice Type",
                 style = MaterialTheme.typography.headlineSmall
@@ -162,4 +151,4 @@ fun InvoiceTypeScreen(
 
         }
     }
-}
+

@@ -34,24 +34,14 @@ import com.example.jetsat.repsentation.components.SearchableDropdownTextField
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
+import com.example.jetsat.repsentation.components.ScreenContainer
 
 @Composable
 fun ProductScreen(productViewModel: ProductViewModel = hiltViewModel()) {
 
     val productList by productViewModel.productList.collectAsState()
     val categoryList by productViewModel.categoryList.collectAsState()
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF5F5F5)) // Soft gray background
-
-    ) {
-
-        Column(
-            modifier = Modifier.fillMaxSize()
-                .padding(16.dp, vertical = 12.dp)
-        ) {
+    ScreenContainer {
 
             Text(
                 text = "Add Product",
@@ -163,4 +153,4 @@ fun ProductScreen(productViewModel: ProductViewModel = hiltViewModel()) {
             }
         }
     }
-}
+
