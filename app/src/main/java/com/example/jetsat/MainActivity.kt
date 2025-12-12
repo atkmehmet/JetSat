@@ -16,6 +16,7 @@ import com.example.jetsat.repsentation.UI.MainMenuScreen
 import com.example.jetsat.repsentation.UI.ProductScreen
 import com.example.jetsat.repsentation.UI.ProductSearchScreen
 import com.example.jetsat.repsentation.UI.barcode.ScannerMainScreen
+import com.example.jetsat.repsentation.components.Accordion
 
 import com.example.jetsat.ui.theme.JetSatTheme
 import dagger.hilt.EntryPoint
@@ -31,7 +32,8 @@ class MainActivity : ComponentActivity() {
           // ScannerMainScreen()
             //ProductSearchScreen()
            // ProductScreen()
-            MainMenuScreen()
+         //   MainMenuScreen()
+            Accordion()
         }
     }
 }
