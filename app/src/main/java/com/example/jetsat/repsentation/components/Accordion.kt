@@ -3,6 +3,7 @@ package com.example.jetsat.repsentation.components
 import androidx.collection.emptyLongSet
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,12 +41,15 @@ fun Accordion(){
                 .fillMaxWidth()
                 .padding(16.dp)
                 .clickable { openClose = !openClose },
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+               horizontalArrangement = Arrangement.SpaceBetween
         ){
                   if (openClose)
                       Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription ="" )
                 else
                    Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription ="" )
+            
+            Text(text = "See Products")
         }
         if(openClose){
             Column {
