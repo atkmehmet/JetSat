@@ -1,5 +1,6 @@
 package com.example.jetsat.repsentation.UI
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,6 +34,9 @@ import com.example.jetsat.repsentation.components.CustomOutlinedTextField
 import com.example.jetsat.repsentation.components.SearchableDropdownTextField
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import com.example.jetsat.repsentation.components.ScreenContainer
 
@@ -41,6 +45,14 @@ fun ProductScreen(productViewModel: ProductViewModel = hiltViewModel()) {
 
     val productList by productViewModel.productList.collectAsState()
     val categoryList by productViewModel.categoryList.collectAsState()
+
+    var openClose by remember {
+        mutableStateOf(false)
+    }
+    var rotation by  animateFloatAsState(
+        targetValue = if (openClose) 180f else 0f,
+        label = ""
+    )
     ScreenContainer {
 
             Text(
@@ -114,6 +126,7 @@ fun ProductScreen(productViewModel: ProductViewModel = hiltViewModel()) {
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
+
 
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
