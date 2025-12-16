@@ -49,10 +49,11 @@ fun ProductScreen(productViewModel: ProductViewModel = hiltViewModel()) {
     var openClose by remember {
         mutableStateOf(false)
     }
-    var rotation by  animateFloatAsState(
+    val rotation by  animateFloatAsState(
         targetValue = if (openClose) 180f else 0f,
         label = ""
     )
+
     ScreenContainer {
 
             Text(
