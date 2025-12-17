@@ -128,43 +128,46 @@ fun ProductScreen(productViewModel: ProductViewModel = hiltViewModel()) {
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
+           AccordionLib(header = "Product List") {
 
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(productList, key = { it.id }) { item ->
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 6.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        elevation = CardDefaults.cardElevation(4.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
 
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(text = "Name: ${item.productName}")
-                                Text(text = "Buy: ${item.productTakePrice} TL")
-                                Text(text = "Sell: ${item.productSoldPrice} TL")
-                            }
+               LazyColumn(
+                   modifier = Modifier.fillMaxSize()
+               ) {
+                   items(productList, key = { it.id }) { item ->
+                       Card(
+                           modifier = Modifier
+                               .fillMaxWidth()
+                               .padding(vertical = 6.dp),
+                           shape = RoundedCornerShape(16.dp),
+                           elevation = CardDefaults.cardElevation(4.dp)
+                       ) {
+                           Row(
+                               modifier = Modifier
+                                   .fillMaxWidth()
+                                   .padding(16.dp),
+                               horizontalArrangement = Arrangement.SpaceBetween
+                           ) {
 
-                            Row {
-                                IconButton(onClick = { productViewModel.onEditProduct(item) }) {
-                                    Icon(Icons.Default.Edit, contentDescription = "Edit")
-                                }
-                                IconButton(onClick = { productViewModel.onDeleteProduct(item.id) }) {
-                                    Icon(Icons.Default.Delete, contentDescription = "Delete")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+                               Column(modifier = Modifier.weight(1f)) {
+                                   Text(text = "Name: ${item.productName}")
+                                   Text(text = "Buy: ${item.productTakePrice} TL")
+                                   Text(text = "Sell: ${item.productSoldPrice} TL")
+                               }
+
+                               Row {
+                                   IconButton(onClick = { productViewModel.onEditProduct(item) }) {
+                                       Icon(Icons.Default.Edit, contentDescription = "Edit")
+                                   }
+                                   IconButton(onClick = { productViewModel.onDeleteProduct(item.id) }) {
+                                       Icon(Icons.Default.Delete, contentDescription = "Delete")
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           }
         }
     }
 
