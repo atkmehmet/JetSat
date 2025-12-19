@@ -93,6 +93,9 @@ fun InvoiceTypeScreen(
                 text = "Invoice Type List",
                 style = MaterialTheme.typography.titleMedium
             )
+        AccordionLib(header = "Invoice Type List") {
+
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -147,6 +150,7 @@ fun InvoiceTypeScreen(
 
                 }
             }
+        }
 
 
         }
