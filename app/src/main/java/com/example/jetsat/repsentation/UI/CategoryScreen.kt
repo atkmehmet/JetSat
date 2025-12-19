@@ -85,34 +85,38 @@ fun CategoryScreen(categoryViewModel: CategoryViewModel = hiltViewModel()) {
             text = "Category List",
             style = MaterialTheme.typography.headlineLarge
         )
+        AccordionLib(header = "Category List") {
 
-        Spacer(Modifier.height(8.dp))
 
-        // Liste
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp)
-        ) {
+            Spacer(Modifier.height(8.dp))
 
-            items(categories) { item ->
+            // Liste
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
+            )
+            {
 
-                StylishCard {
+                items(categories) { item ->
 
-                    Column(
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text("Id: ${item.id}")
-                        Text("Name: ${item.categoryName}")
-                    }
+                    StylishCard {
 
-                    Row {
-                        IconButton(onClick = { categoryViewModel.onEditCategory(item) }) {
-                            Icon(Icons.Default.Edit, contentDescription = "Edit")
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text("Id: ${item.id}")
+                            Text("Name: ${item.categoryName}")
                         }
 
-                        IconButton(onClick = { categoryViewModel.onDeleteCategory(item.id) }) {
-                            Icon(Icons.Default.Delete, contentDescription = "Delete")
+                        Row {
+                            IconButton(onClick = { categoryViewModel.onEditCategory(item) }) {
+                                Icon(Icons.Default.Edit, contentDescription = "Edit")
+                            }
+
+                            IconButton(onClick = { categoryViewModel.onDeleteCategory(item.id) }) {
+                                Icon(Icons.Default.Delete, contentDescription = "Delete")
+                            }
                         }
                     }
                 }

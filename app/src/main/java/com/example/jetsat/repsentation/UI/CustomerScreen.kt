@@ -112,12 +112,16 @@ fun CustomerScreen(
             style = MaterialTheme.typography.headlineSmall
         )
 
-        Spacer(Modifier.height(8.dp))
+        AccordionLib(header = "Customer List") {
+
+
+
 
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-        ) {
+        )
+        {
 
             items(
                 items = customers,
@@ -159,6 +163,7 @@ fun CustomerScreen(
                     }
                 }
             }
+        }
         }
     }
 }
