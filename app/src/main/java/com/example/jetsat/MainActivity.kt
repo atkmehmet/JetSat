@@ -32,8 +32,8 @@ class MainActivity : ComponentActivity() {
           // ScannerMainScreen()
             //ProductSearchScreen()
            // ProductScreen()
-         //   MainMenuScreen()
-            Accordion()
+           MainMenuScreen()
+               //   Accordion()
         }
     }
 }
