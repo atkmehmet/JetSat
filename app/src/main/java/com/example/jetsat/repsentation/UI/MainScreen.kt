@@ -30,7 +30,7 @@ fun MainMenuScreen() {
             composable(Screen.InvoiceType.route) { InvoiceTypeScreen() }
             composable(Screen.Category.route) { CategoryScreen() }
             composable(Screen.Sales.route) { ProductSearchScreen() }
-            composable(Screen.Barcode.route) { ProductSearchScreen() }
+          //  composable(Screen.Barcode.route) { ProductSearchScreen() }
         }
     }
 }
