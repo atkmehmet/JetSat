@@ -25,9 +25,7 @@ fun ScreenContainer(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp, 12.dp)
-                .background(
-                    color = Color.Red
-                )
+               
         ) {
             content()
         }
